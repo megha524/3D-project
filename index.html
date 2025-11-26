@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Jewelry Collection - 3D Experience</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="components.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        }
+
+        #scene-container {
+            width: 100%;
+            height: 100vh;
+        }
+
+        .header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(139, 69, 19, 0.1));
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            z-index: 100;
+        }
+
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            color: #FFD700;
+            text-align: center;
+            text-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+            letter-spacing: 2px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #B8860B;
+            text-align: center;
+            margin-top: 8px;
+            letter-spacing: 1px;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .ui-panel {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(255, 215, 0, 0.05));
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            border-radius: 15px;
+            padding: 20px;
+            max-width: 280px;
+            z-index: 100;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .instruction {
+            color: #FFD700;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .ring-info {
+            color: #B8860B;
+            font-size: 11px;
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+
+        #close-button {
+            position: absolute;
+            top: 40px;
+            right: 30px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #1a1a1a;
+            border: none;
+            padding: 12px 28px;
+            cursor: pointer;
+            display: none;
+            z-index: 1000;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        #close-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.5);
+            background: linear-gradient(135deg, #FFA500, #FFD700);
+        }
+
+        #close-button:active {
+            transform: translateY(0);
+        }
+
+        .ring-description {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(255, 215, 0, 0.05));
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            border-radius: 15px;
+            padding: 20px;
+            max-width: 300px;
+            color: #FFD700;
+            font-size: 13px;
+            z-index: 1000;
+            display: none;
+            animation: slideInRight 0.5s ease-out;
+        }
+
+        .ring-description h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #FFA500;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 4px 15px rgba(255, 215, 0, 0.3); }
+            50% { text-shadow: 0 4px 25px rgba(255, 215, 0, 0.6); }
+        }
+
+        .glow-effect {
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 32px;
+            }
+
+            .ui-panel {
+                bottom: 20px;
+                left: 20px;
+                max-width: 250px;
+            }
+
+            .ring-description {
+                bottom: 20px;
+                right: 20px;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="scene-container"></div>
+    <div class="header">
+        <div class="title">✨ Luxury Jewelry Collection ✨</div>
+        <div class="subtitle">Interactive 3D Experience • Click to Explore</div>
+    </div>
+    <div class="ui-panel">
+        <div class="instruction">💡 Interactions:</div>
+        <div class="ring-info">
+            • Click on any ring to focus<br>
+            • Drag to rotate<br>
+            • Click Close to return
+        </div>
+    </div>
+    <button id="close-button">✨ Back to Collection</button>
+    <div id="ring-description" class="ring-description"></div>
+    <a-scene background="color: #0a0a0a">
+        <!-- Camera with smooth controls -->
+        <a-entity camera look-controls position="0 1.6 3"></a-entity>
+
+        <!-- Enhanced Lighting Setup -->
+        <a-light type="ambient" color="#ffffff" intensity="0.4"></a-light>
+        <a-light type="directional" color="#ffffff" intensity="0.9" position="-2 2 1"></a-light>
+        <a-light type="directional" color="#87CEEB" intensity="0.3" position="2 2 -1"></a-light>
+        
+        <!-- Warm accent lighting -->
+        <a-light type="point" color="#FFD700" intensity="0.6" position="-1.5 2 1.5" distance="8"></a-light>
+        <a-light type="point" color="#FFA500" intensity="0.5" position="1.5 2 1.5" distance="8"></a-light>
+        
+        <!-- Spotlight for drama -->
+        <a-light type="spot" color="#FFFFFF" intensity="0.8" position="0 3 2" angle="45" penumbra="0.5"></a-light>
+
+        <!-- Jewelry Box with enhanced material -->
+        <a-entity id="jewelry-box" 
+                  geometry="primitive: box; width: 2; height: 0.5; depth: 1.5" 
+                  material="color: #8B4513; metalness: 0.3; roughness: 0.7; emissive: #3d2817; emissiveIntensity: 0.2"
+                  position="0 0 0">
+            
+            <!-- Premium Rings with improved materials -->
+            <a-entity id="ring1" 
+                      geometry="primitive: torus; radius: 0.1; radiusTubular: 0.02" 
+                      material="color: #FFD700; metalness: 0.95; roughness: 0.05; emissive: #DAA520; emissiveIntensity: 0.1" 
+                      position="-0.5 0.3 0.3" 
+                      ring-focus drag-rotate
+                      animation="property: rotation; to: 0 360 0; dur: 4000; loop: true; easing: linear;"></a-entity>
+            
+            <a-entity id="ring2" 
+                      geometry="primitive: torus; radius: 0.12; radiusTubular: 0.025" 
+                      material="color: #C0C0C0; metalness: 0.95; roughness: 0.05; emissive: #A9A9A9; emissiveIntensity: 0.1" 
+                      position="0 0.3 0.3" 
+                      ring-focus drag-rotate
+                      animation="property: rotation; to: 0 360 0; dur: 5000; loop: true; easing: linear;"></a-entity>
+            
+            <a-entity id="ring3" 
+                      geometry="primitive: torus; radius: 0.08; radiusTubular: 0.015" 
+                      material="color: #FF6347; metalness: 0.95; roughness: 0.05; emissive: #DC143C; emissiveIntensity: 0.1" 
+                      position="0.5 0.3 0.3" 
+                      ring-focus drag-rotate
+                      animation="property: rotation; to: 0 360 0; dur: 3500; loop: true; easing: linear;"></a-entity>
+        </a-entity>
+
+        <!-- Decorative elements -->
+        <a-entity id="back-light" 
+                  geometry="primitive: plane; width: 4; height: 2" 
+                  material="color: #1a1a2e; emissive: #16213e; emissiveIntensity: 0.5"
+                  position="0 1 -2"></a-entity>
+
+        <!-- Enhanced Sky with gradient feel -->
+        <a-sky color="#0f0f1e"></a-sky>
+        
+        <!-- Environment preset -->
+        <a-entity environment="preset: forest; groundColor: #1a1a1a; grid: none"></a-entity>
+    </a-scene>
+</body>
+</html>
