@@ -76,6 +76,10 @@ Visit: [Your Vercel URL will go here]
 
 Feel free to use this project for your portfolio or commercial purposes.
 
+## 🙏 Inspired By
+
+- Original 3D Animation Project: https://github.com/abhayrr-181/3danimatiom
+
 ## 👩‍💻 Author
 
 Created by Megha - Interactive 3D Web Developer
