@@ -21,22 +21,14 @@ git clone https://github.com/megha524/3D-project.git
 cd 3D-project
 ```
 
-2. Open in browser:
-```bash
-# Simply open index.html in your browser
+2. Open in your browser (no server required):
+
+```powershell
+# On Windows you can open the file directly from PowerShell
 start index.html
 ```
 
-Or use a local server:
-```bash
-# Using Python
-python -m http.server 8000
-
-# Using Node.js
-npx http-server
-```
-
-Then visit: `http://localhost:8000`
+Or double-click `index.html` in your file manager — the scene runs in any modern browser.
 
 ## 💎 The Rings
 
@@ -70,7 +62,7 @@ Then visit: `http://localhost:8000`
 
 ## 🌐 Live Demo
 
-Visit: [Your Vercel URL will go here]
+Visit: https://3-d-project-rho.vercel.app/
 
 ## 📝 License
 
